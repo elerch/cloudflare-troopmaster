@@ -41,8 +41,16 @@ async function modifyBody(pageContentTextPromise, originalResponse) {
         `<div id="pagecontent">
           <!--edge side include via cf worker-->
           ${await pageContentResponse.text()}
-          <!--invisible image to establish tm cookie-->
-          <img src="https://tmweb.troopmaster.com/mysite/${TMSITENAME}" height="1" width="1" style="opacity:0" >
+          <!--invisible image to establish tm cookie. Note that troopmaster redirects this https to
+              /Website/Home, then redirects again, explicitly to http. Since Troopmaste also
+              doesn't respect CORS, our only way to establish a cookie for login is with this image
+              tag that eventually will try to fetch an http resource, but we can't tell the browser
+              here to avoid redirects (we don't want the "image", only the cookie). as if that's not
+              enough, javascript on /Website/Home actually checks for http and does a
+              **CLIENT SIDE REDIRECT BACK TO HTTPS**, resulting in a wild flash that we just
+              avoid with a simple 302 (first in this worker, then back as a checkbox on the
+              CloudFlare dashboard. Seriously, people...I don't know whether to laugh or cry -->
+          <img src="https://tmweb.troopmaster.com/mysite/${TMSITENAME}?Home" height="1" width="1" style="opacity:0" >
           <!--end invisible image to establish tm cookie-->
           <!--End edge side include via cf worker-->
          </div>`);
