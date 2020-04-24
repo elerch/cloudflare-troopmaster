@@ -103,14 +103,15 @@ async function handleRequest(request) {
     const requestPath = requestUrl.pathname;
     let originUrl = `${originHost}${requestPath}`;
     let home = null;
-    if (requestUrl.protocol === 'http:') {
-      // The front-end has javascript to refresh the page after the whole
-      // thing has been rendered, resulting in an ugly flash. We'll do the
-      // redirect server (well, edge) side instead. Note this breaks debugging,
-      // which we can fix later because deploys are so fast that we can
-      // just YOLO our changes
-      return Response.redirect(request.url.replace(/^http/, 'https'), 301);
-    }
+    // Cloudflare offers this as a checkbox
+    // if (requestUrl.protocol === 'http:') {
+    //   // The front-end has javascript to refresh the page after the whole
+    //   // thing has been rendered, resulting in an ugly flash. We'll do the
+    //   // redirect server (well, edge) side instead. Note this breaks debugging,
+    //   // which we can fix later because deploys are so fast that we can
+    //   // just YOLO our changes
+    //   return Response.redirect(request.url.replace(/^http/, 'https'), 301);
+    // }
     if (requestPath === '/' && request.method === 'GET') {
       originUrl = origin;
       home = homePage(originHost);
