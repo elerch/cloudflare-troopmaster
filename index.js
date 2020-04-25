@@ -107,7 +107,7 @@ async function handleRequest(request) {
     // curl -b TroopMasterWebSiteID=203232  -v https://tmweb.troopmaster.com/Website/Home
     const origin = 'https://tmweb.troopmaster.com/Website/Home';
     const originHost = 'https://tmweb.troopmaster.com';
-    const requestUrl = new URL(request.url)
+    const requestUrl = new URL(request.url);
     const requestPath = requestUrl.pathname;
     let originUrl = `${originHost}${requestPath}`;
     let home = null;
