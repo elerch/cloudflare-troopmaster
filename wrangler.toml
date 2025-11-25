@@ -14,3 +14,4 @@ TMSITENAME = "Troop618"
 
 [assets]
 directory = "./static"
+binding = "ASSETS"
