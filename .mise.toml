@@ -1,0 +1,6 @@
+[tools]
+bun = "1.3.3"
+
+[tasks]
+deploy = "bunx wrangler deploy"
+dev = "bunx wrangler dev"
