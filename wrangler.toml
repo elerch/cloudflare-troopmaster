@@ -1,0 +1,16 @@
+name = "troop618"
+account_id = "c7221b4e158b0c8f6009a627d5a6a41d"
+compatibility_date = "2025-11-25"
+main = "src/index.js"
+
+routes = [
+  { pattern = "troop618.org/*", zone_id = "62922e2b7c3bb7baee2d472943cfd594" },
+  { pattern = "*.troop618.org/*", zone_id = "62922e2b7c3bb7baee2d472943cfd594" }
+]
+
+[vars]
+TMSITEID = "203232"
+TMSITENAME = "Troop618"
+
+[assets]
+directory = "./static"

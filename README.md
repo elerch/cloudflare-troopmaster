@@ -18,7 +18,8 @@ Broken here would mean that clicking login forces you through the multiple
 drop downs to select site.
 
 This section should be in your wrangler.toml file. Replace with the correct
-values of course.
+values of course. An example wrangler.toml file (for troop618.org) is included.
+
 
 ```toml
 [vars]
