@@ -112,9 +112,14 @@ async function homePage(origin) {
  * Respond with whatever origin gives us
  * @param {Request} request
  */
-async function handleRequest(request) {
+async function handleRequest(request, env) {
   let response;
   try {
+    // Check for static assets first
+    const url = new URL(request.url);
+    if (url.pathname.startsWith('/tree')) {
+      return env.ASSETS.fetch(request);
+    }
     // curl -b TroopMasterWebSiteID=203232  -v https://tmweb.troopmaster.com/Website/Home
     const origin = 'https://tmweb.troopmaster.com/Website/Home';
     const originHost = 'https://tmweb.troopmaster.com';
@@ -164,5 +169,5 @@ async function handleRequest(request) {
 // neither browser nor node. This is the hook into the CF Worker ecosystem,
 // so we need to have this code and is safe to disable eslint for this line
 addEventListener('fetch', (event) => { // eslint-disable-line no-restricted-globals
-  event.respondWith(handleRequest(event.request));
+  event.respondWith(handleRequest(event.request, event.env));
 });
