@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      # The legacy Airbnb lint config conflicts with ESLint 9 during installation.
+      npm_config_legacy_peer_deps: 'true'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
